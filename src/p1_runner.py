@@ -1,8 +1,6 @@
 from __future__ import annotations
-
-# TODO:
-# - Import csv from src.p1_io
-# - Import build_expression_tree from src.expression_tree
+from src.p1_io import parse_postfix_csv
+from src.expression_tree import build_expression_tree
 
 
 def main() -> None:
@@ -20,7 +18,16 @@ def main() -> None:
       - Call build_expression_tree(tokens)
       - Print line index and root.value (and optionally tokens)
     """
-    # TODO: implement
+    
+    file_path = "p1_construct_tree.csv" 
+    expressions = parse_postfix_csv(file_path)
+
+    for i, tokens in enumerate(expressions, start=1):
+        root = build_expression_tree(tokens)
+        # Minimal sanity output: line number + root operator/value
+        print(f"Line {i}: root={root.value}  tokens={tokens}")
+
+    
     pass
 
 

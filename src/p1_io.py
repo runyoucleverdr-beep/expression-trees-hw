@@ -13,7 +13,7 @@ def parse_postfix_csv(file_path: str) -> List[List[str]]:
 
     Output:
       - A list where each element is a token-list for one expression line.
-
+    
     TODO:
       - Open the file (utf-8).
       - Iterate line by line.
@@ -25,9 +25,18 @@ def parse_postfix_csv(file_path: str) -> List[List[str]]:
     """
     expressions: List[List[str]] = []
 
-    # TODO: open file, iterate each line
-    # with open(file_path, "r", encoding="utf-8") as f:
-    #     for raw_line in f:
-    #         ...
+    with open(file_path, "r", encoding="utf-8") as f:
+        for raw_line in f:
+            line = raw_line.strip()
+            if not line:
+                continue
+            
+            # Remove surrounding quotes if present
+            if (line.startswith('"') and line.endswith('"')) or (line.startswith("'") and line.endswith("'")):
+                line = line[1:-1]
+
+            tokens = [t.strip() for t in line.split(",") if t.strip() != ""]
+            if tokens:
+                expressions.append(tokens)
 
     return expressions
