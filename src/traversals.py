@@ -5,40 +5,47 @@ from src.node import Node
 
 def to_prefix_list(root: Optional[Node]) -> List[str]:
     """
-    Return prefix notation as a list using pre-order traversal (root, left, right).
+    Prefix (pre-order): root, left, right
+    Empty tree -> []
 
     """
-    # TODO:
-    # - If root is None: return []
-    # - Otherwise:
-    #     1) start with [root.value]
-    #     2) extend with prefix of left subtree
-    #     3) extend with prefix of right subtree
-    return []
+    if root is None:
+        return []
+    result: List[str] = [root.value]
+    result.extend(to_prefix_list(root.left))
+    result.extend(to_prefix_list(root.right))
+    return result
 
 
 def to_postfix_list(root: Optional[Node]) -> List[str]:
     """
-    Return postfix notation as a list using post-order traversal (left, right, root).
-
+    Postfix (post-order): left, right, root
+    Empty tree -> []
     """
-    # TODO:
-    # - If root is None: return []
-    # - Otherwise:
-    #     1) postfix of left
-    #     2) postfix of right
-    #     3) append root.value at the end
-    return []
+    if root is None:
+        return []
+    result: List[str] = []
+    result.extend(to_postfix_list(root.left))
+    result.extend(to_postfix_list(root.right))
+    result.append(root.value)
+    return result
 
 
 def to_infix_list(root: Optional[Node]) -> List[str]:
     """
-    Return infix notation as a list using in-order traversal (left, root, right).
-
+    Infix (in-order): left, root, right + parentheses.
     """
-    # TODO:
-    # - If root is None: return []
-    # - For a leaf node: return [root.value]
-    # - For an internal node (operator):
-    #       return ["("] + infix(left) + [root.value] + infix(right) + [")"]
-    return []
+    if root is None:
+        return []
+    
+    # Leaf node: just the operand itself (no parentheses here)
+    if root.left is None and root.right is None:
+        return [root.value]
+    
+    # Internal node (operator): wrap the whole sub-expression
+    result: List[str] = ["("]
+    result.extend(to_infix_list(root.left))
+    result.append(root.value)
+    result.extend(to_infix_list(root.right))
+    result.append(")")
+    return result
