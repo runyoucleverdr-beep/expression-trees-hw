@@ -51,3 +51,8 @@ This repository contains solutions for Problems 1–4:
 ## Environment / Setup
 
 Python 3.x recommended.
+
+## AI statement:
+In homework 2 assignment, AI is used to
+1) help me learn how to use git, what are the basic commands, in what stage of the coding workflow that I can leave a comment and push.
+2) help me learn more about markdown format and rearranged this file with me. 
