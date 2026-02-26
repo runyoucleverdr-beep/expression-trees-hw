@@ -46,13 +46,21 @@ This repository contains solutions for Problems 1–4:
   Run in PowerShell:  
   `python -c "from src.postfix_eval import evaluate_postfix; print(evaluate_postfix('5 1 2 + 4 * + 3 -'))"`
 
+- `problem4.md`  
+  Problem 4 report: summary of edge case handling for Problems 1–3.
+
+- `tests/test_edge_cases.py`  
+  Problem 4 test cases demonstrating edge case handling .  
+  Run in PowerShell:  
+  `python -m pytest -q`
+
 ---
 
 ## Environment / Setup
 
-Python 3.x recommended.
+Python 3.x .
 
 ## AI statement:
 In homework 2 assignment, AI is used to
-1) help me learn how to use git, what are the basic commands, in what stage of the coding workflow that I can leave a comment and push.
-2) help me learn more about markdown format and rearranged this file with me. 
+1) help me learn how to use git, what are the basic commands, in what stage of the coding workflow that I can commit and push.
+2) help me learn more about markdown format and rearranged markdown files with me. 
