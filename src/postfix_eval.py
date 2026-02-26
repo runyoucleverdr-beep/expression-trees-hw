@@ -1,6 +1,8 @@
 from __future__ import annotations
 from typing import Set
 from src.stack import Stack
+import math
+
 
 OPERATORS: Set[str] = {"+", "-", "*", "/"}
 
@@ -57,6 +59,9 @@ def evaluate_postfix(postfix_expr: str) -> float:
         raise ValueError("Invalid postfix expression: leftover operands after evaluation")
 
     result = stack.pop()
+
+    if not math.isfinite(result):
+        return result
 
     if abs(result - round(result)) < 1e-9:
         return int(round(result))
