@@ -16,37 +16,26 @@ class Stack:
         return self._top == -1
     
     def push(self, item: Any) -> None:
-        """
-        Push item onto stack.
+        #Push item onto stack.
 
-        TODO:
-        - Add item to underlying list (append is allowed)
-        - Update self._top accordingly
-        """
-        pass
+        self._data.append(item)
+        self._top += 1
 
     def pop(self) -> Any:
-        """
-        Pop and return top item.
+        #Pop and return top item.
 
-        TODO:
-        - If empty, raise IndexError (or a custom error)
-        - Retrieve the top element
-        - Remove it from underlying list
-        - Update self._top
-        - Return the element
-        """
-        pass
+        item = self._data[self._top]
+        # remove the top element from underlying storage
+        self._data.pop()
+        self._top -= 1
+        return item
 
     def peek(self) -> Any:
-        """
-        Return top item without removing it.
+        #Return top item without removing it.
 
-        TODO:
-        - If empty, raise IndexError
-        - Return current top element
-        """
-        pass
+        if self.is_empty():
+            raise IndexError("peek from empty stack")
+        return self._data[self._top]
 
     def size(self) -> int:
         return self._top + 1

@@ -17,21 +17,48 @@ def is_number_token(token: str) -> bool:
 
 
 def evaluate_postfix(postfix_expr: str) -> float:
-    """
-    Evaluate a postfix expression (space-separated tokens) using a stack,
-    WITHOUT constructing an expression tree.
 
-    TODO (algorithm):
-      - Split postfix_expr by whitespace into tokens
-      - For each token:
-          * If number: push it (as float) onto the stack
-          * If operator:
-              - pop right operand
-              - pop left operand
-              - apply operator (left op right)
-              - push result back
-          * Else: raise ValueError for invalid token
-      - At end: stack must contain exactly one value -> return it
-      - If tokens empty or leftover values -> raise ValueError
-    """
-    return 0.0
+    # Evaluate a postfix expression using a stack
+
+    if postfix_expr is None:
+        raise ValueError("postfix_expr is None")
+    
+    tokens = postfix_expr.split()
+    if len(tokens) == 0:
+        raise ValueError("postfix_expr is empty")
+    
+    stack = Stack()
+    for token in tokens:
+        if token in OPERATORS:
+            # need two operands
+            if stack.size() < 2:
+                raise ValueError(f"Invalid postfix expression: not enough operands for '{token}'")
+
+            right = stack.pop()
+            left = stack.pop()
+
+            if token == "+":
+                stack.push(left + right)
+            elif token == "-":
+                stack.push(left - right)
+            elif token == "*":
+                stack.push(left * right)
+            else:  # token == "/"
+                if right == 0:
+                    raise ZeroDivisionError("division by zero")
+                stack.push(left / right)
+
+        elif is_number_token(token):
+            stack.push(float(token))
+        else:
+            raise ValueError(f"Invalid token '{token}'")
+        
+    if stack.size() != 1:
+        raise ValueError("Invalid postfix expression: leftover operands after evaluation")
+
+    result = stack.pop()
+
+    if abs(result - round(result)) < 1e-9:
+        return int(round(result))
+
+    return result
